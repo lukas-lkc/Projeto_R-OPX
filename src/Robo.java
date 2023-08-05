@@ -1,22 +1,63 @@
 public class Robo {
-    String nome;
-    String cor;
-    String tracao;
+    final String nome;
+    final String cor = "Azul";
+    final String tracao = "esteiras";
     int nivelBateriaAtual;
-    Boolean antena;
+    final Boolean antena = true;
     Boolean radio;
     Boolean bracoD;
     Boolean bracoE;
-    float velMax;
-    float peso;
-    float pesoCargaMax;
-    float posicaoX = 50.0f;
-    float posicaoY = 50.0f;
-    //funcao
-    public void move (float x, float y){
-        posicaoX = x;
-        posicaoY = y;
+    final float velMax = 5.0f;
+    final float peso;
+    final float pesoCargaMax = 20.0f;
+    float posicaoX;
+    float posicaoY;
+
+    int orientacao;
+    static final int FRENTE = 0;
+    static final int ATRAS = 1;
+    static final int ESQUERDA = 2;
+    static final int DIREITA = 3;
+
+    public void setOrientacao (char tecla){
+        switch (tecla){
+            case 'w':
+                this.orientacao = FRENTE; break;
+            case 's':
+                this.orientacao = ATRAS; break;
+            case 'a':
+                this.orientacao = ESQUERDA; break;
+            case 'd':
+                this.orientacao = DIREITA; break;    
+        }
     }
+
+    //construtores
+
+    public Robo(String nome, float peso){
+        this.nome = nome;
+        this.peso = peso;
+    }
+    public Robo(String nome, float peso, float posX, float posY){
+        this.nome = nome;
+        this.peso = peso;
+        this.posicaoX = posX;
+        this.posicaoY = posY;
+    }
+
+    public Robo() {
+
+    }
+
+    public void move(float posX, float posY){
+        this.posicaoX = posX;
+        this.posicaoY = posY;
+    }
+
+    public void move (float pos){
+        this.posicaoY = pos;
+    }
+
     public void printStatus (){
         System.out.println("---------------------------------INFO--------------------------------");
         System.out.println("Olá, mestre! Meu nome é "+ nome + " e estou à disposição para ajudar.");
@@ -31,27 +72,12 @@ public class Robo {
         System.out.println("Meu rádio está operacional? "+ radio);
         System.out.println("Meu braço direito está operacional? "+ bracoD);
         System.out.println("Meu braço esquerdo está operacional? "+ bracoE);
-        System.out.println("Analisando minhas coordenadas, estou na posição: ("+ posicaoX +","+ posicaoY+ ") da sala.");
         System.out.println("---------------------------------------------------------------------");
     }
-//classe acima
-//bloco executável abaixo
-    public static void main(String[] args){
-        Robo obj1 = new Robo();
-        obj1.nome = "R-ATM";
-        obj1.cor = "Azul";
-        obj1.velMax = 5.0f;
-        obj1.nivelBateriaAtual = 58;
-        obj1.peso = 70.0f;
-        obj1.pesoCargaMax = 20.0f;
-        obj1.tracao = "esterias";
-        obj1.antena = true;
-        obj1.radio = true;
-        obj1.bracoD = true;
-        obj1.bracoE = true;
-        obj1.move(60,50);
-        obj1.printStatus(); //esse método passa todos os valores da classe Robo para o obj1
-        obj1.move(65,55);
-        obj1.printStatus();
+
+    public void printPos (){
+        System.out.println("Analisando minhas coordenadas, estou na posição: ("+ posicaoX +","+ posicaoY+ ") da sala.");
     }
+    
+//classe acima
 }
